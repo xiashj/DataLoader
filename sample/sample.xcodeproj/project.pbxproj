@@ -14,6 +14,10 @@
 		969C3F031B39724A00932F65 /* sampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C3F021B39724A00932F65 /* sampleTests.m */; };
 		969C3F0E1B39766D00932F65 /* CurrentWeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C3F0D1B39766D00932F65 /* CurrentWeatherViewController.m */; };
 		969C3F111B3976B300932F65 /* DailyForecastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C3F101B3976B300932F65 /* DailyForecastViewController.m */; };
+		96CFB6C11B3A96860092F655 /* HttpURLString.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFB6C01B3A96860092F655 /* HttpURLString.m */; };
+		96CFB6C41B3A9B980092F655 /* Weather.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFB6C31B3A9B980092F655 /* Weather.m */; };
+		96CFB6C71B3A9DDB0092F655 /* DailyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFB6C61B3A9DDB0092F655 /* DailyForecast.m */; };
+		96CFB6CA1B3A9F220092F655 /* DataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFB6C91B3A9F220092F655 /* DataLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,15 @@
 		969C3F0D1B39766D00932F65 /* CurrentWeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentWeatherViewController.m; sourceTree = "<group>"; };
 		969C3F0F1B3976B300932F65 /* DailyForecastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyForecastViewController.h; sourceTree = "<group>"; };
 		969C3F101B3976B300932F65 /* DailyForecastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyForecastViewController.m; sourceTree = "<group>"; };
+		96CFB6BE1B3A62B20092F655 /* HttpURLConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpURLConstant.h; sourceTree = "<group>"; };
+		96CFB6BF1B3A96860092F655 /* HttpURLString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpURLString.h; sourceTree = "<group>"; };
+		96CFB6C01B3A96860092F655 /* HttpURLString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpURLString.m; sourceTree = "<group>"; };
+		96CFB6C21B3A9B980092F655 /* Weather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Weather.h; sourceTree = "<group>"; };
+		96CFB6C31B3A9B980092F655 /* Weather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Weather.m; sourceTree = "<group>"; };
+		96CFB6C51B3A9DDB0092F655 /* DailyForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyForecast.h; sourceTree = "<group>"; };
+		96CFB6C61B3A9DDB0092F655 /* DailyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyForecast.m; sourceTree = "<group>"; };
+		96CFB6C81B3A9F220092F655 /* DataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLoader.h; sourceTree = "<group>"; };
+		96CFB6C91B3A9F220092F655 /* DataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLoader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +101,15 @@
 				969C3F0D1B39766D00932F65 /* CurrentWeatherViewController.m */,
 				969C3F0F1B3976B300932F65 /* DailyForecastViewController.h */,
 				969C3F101B3976B300932F65 /* DailyForecastViewController.m */,
+				96CFB6BE1B3A62B20092F655 /* HttpURLConstant.h */,
+				96CFB6BF1B3A96860092F655 /* HttpURLString.h */,
+				96CFB6C01B3A96860092F655 /* HttpURLString.m */,
+				96CFB6C21B3A9B980092F655 /* Weather.h */,
+				96CFB6C31B3A9B980092F655 /* Weather.m */,
+				96CFB6C51B3A9DDB0092F655 /* DailyForecast.h */,
+				96CFB6C61B3A9DDB0092F655 /* DailyForecast.m */,
+				96CFB6C81B3A9F220092F655 /* DataLoader.h */,
+				96CFB6C91B3A9F220092F655 /* DataLoader.m */,
 				969C3EF31B39724A00932F65 /* Images.xcassets */,
 				969C3EF51B39724A00932F65 /* LaunchScreen.xib */,
 				969C3EE61B39724A00932F65 /* Supporting Files */,
@@ -220,10 +242,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96CFB6CA1B3A9F220092F655 /* DataLoader.m in Sources */,
+				96CFB6C41B3A9B980092F655 /* Weather.m in Sources */,
 				969C3EEC1B39724A00932F65 /* AppDelegate.m in Sources */,
 				969C3F111B3976B300932F65 /* DailyForecastViewController.m in Sources */,
+				96CFB6C71B3A9DDB0092F655 /* DailyForecast.m in Sources */,
 				969C3EE91B39724A00932F65 /* main.m in Sources */,
 				969C3F0E1B39766D00932F65 /* CurrentWeatherViewController.m in Sources */,
+				96CFB6C11B3A96860092F655 /* HttpURLString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +438,7 @@
 				969C3F081B39724A00932F65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		969C3F091B39724A00932F65 /* Build configuration list for PBXNativeTarget "sampleTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +447,7 @@
 				969C3F0B1B39724A00932F65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

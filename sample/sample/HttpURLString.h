@@ -10,4 +10,11 @@
 
 @interface HttpURLString : NSObject
 
++ (NSString *)httpURLStringForCurrentWeatherWithCityName:(NSString *)cityName;
++ (NSString *)httpURLStringForDailyForecastWithCityName:(NSString *)cityName;
+
+- (instancetype)initWithHost:(NSString *)host path:(NSString *)path;
+- (NSString *)urlString;
+- (NSString *)createQueryStringWithDict:(NSDictionary *)dict;
+
 @end

@@ -9,5 +9,8 @@
 #ifndef sample_HttpURLConstant_h
 #define sample_HttpURLConstant_h
 
+#define OpenWeatherMapHost          @"api.openweathermap.org"
+#define CurrentWeatherPath          @"/data/2.5/weather"
+#define DailyForecastPath           @"/data/2.5/forecast/daily"
 
 #endif

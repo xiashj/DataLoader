@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class Weather;
+
 @interface DailyForecast : NSObject
+
+- (NSUInteger)count;
+- (void)addWeather:(Weather *)weather;
+- (Weather *)weatherAtIndex:(NSUInteger)index;
 
 @end
