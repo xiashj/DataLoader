@@ -23,9 +23,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     CurrentWeatherViewController *currentWeatherViewController = [[CurrentWeatherViewController alloc] init];
+    currentWeatherViewController.title = @"实时";
     UINavigationController *currentWeatherNavigationController = [[UINavigationController alloc] initWithRootViewController:currentWeatherViewController];
     
     DailyForecastViewController *dailyForecastViewController = [[DailyForecastViewController alloc] init];
+    dailyForecastViewController.title = @"预报";
     UINavigationController *dailyForecastNavigationController = [[UINavigationController alloc] initWithRootViewController:dailyForecastViewController];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];

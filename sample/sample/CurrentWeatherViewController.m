@@ -7,8 +7,21 @@
 //
 
 #import "CurrentWeatherViewController.h"
+#import "Weather.h"
+#import "DataLoader.h"
+
+typedef NS_ENUM(NSInteger, DataLoadStatus) {
+    DataLoadStatusNone,
+    DataLoadStatusInitial,
+    DataLoadStatusRefresh,
+    DataLoadStatusMore
+};
 
 @interface CurrentWeatherViewController ()
+
+@property (strong, nonatomic) DataLoader *currentWeatherDataLoader;
+@property (assign, nonatomic) DataLoadStatus dataLoadStatus;
+@property (strong, nonatomic) Weather *currentWeather;
 
 @end
 
@@ -22,6 +35,43 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.currentWeatherDataLoader = [self createCurrentWeatherDataLoader];
+    [self.currentWeatherDataLoader startLoad];
+    self.dataLoadStatus = DataLoadStatusInitial;
+}
+
+- (DataLoader *)createCurrentWeatherDataLoader
+{
+    __weak CurrentWeatherViewController *weakViewController = self;
+    DataLoader *dataLoader = [DataLoader dataLoaderForCurrentWeatherWithCityName:@"Shanghai,cn" cachedDataHandler:NULL dataHandler:^(Weather *currentWeather, NSError *error) {
+        if (currentWeather)
+        {
+            weakViewController.currentWeather = currentWeather;
+            [weakViewController.tableView reloadData];
+        }
+        else
+        {
+            NSString *message;
+            
+            if ([error.domain isEqualToString:DataErrorDomain])
+            {
+                message = @"数据有误";
+            }
+            else
+            {
+                message = @"请求失败，请检查网络";
+            }
+
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alertView show];
+        }
+        
+        weakViewController.currentWeatherDataLoader = nil;
+        weakViewController.dataLoadStatus = DataLoadStatusNone;
+    }];
+    
+    return dataLoader;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,26 +82,32 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 1;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
     
     // Configure the cell...
+    cell.textLabel.text = self.currentWeather.main;
+    cell.detailTextLabel.text = self.currentWeather.weatherDescription;
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

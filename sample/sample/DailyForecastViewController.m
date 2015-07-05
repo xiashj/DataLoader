@@ -7,8 +7,22 @@
 //
 
 #import "DailyForecastViewController.h"
+#import "Weather.h"
+#import "DailyForecast.h"
+#import "DataLoader.h"
+
+typedef NS_ENUM(NSInteger, DataLoadStatus) {
+    DataLoadStatusNone,
+    DataLoadStatusInitial,
+    DataLoadStatusRefresh,
+    DataLoadStatusMore
+};
 
 @interface DailyForecastViewController ()
+
+@property (strong, nonatomic) DataLoader *dailyForecastDataLoader;
+@property (assign, nonatomic) DataLoadStatus dataLoadStatus;
+@property (strong, nonatomic) DailyForecast *dailyForecast;
 
 @end
 
@@ -22,6 +36,43 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.dailyForecastDataLoader = [self createDailyForecastDataLoader];
+    [self.dailyForecastDataLoader startLoad];
+    self.dataLoadStatus = DataLoadStatusInitial;
+}
+
+- (DataLoader *)createDailyForecastDataLoader
+{
+    __weak DailyForecastViewController *weakViewController = self;
+    DataLoader *dataLoader = [DataLoader dataLoaderForDailyForecastWithCityName:@"Shanghai,CN" cachedDataHandler:NULL dataHandler:^(DailyForecast *dailyForecast, NSError *error) {
+        if (dailyForecast)
+        {
+            weakViewController.dailyForecast = dailyForecast;
+            [weakViewController.tableView reloadData];
+        }
+        else
+        {
+            NSString *message;
+            
+            if ([error.domain isEqualToString:DataErrorDomain])
+            {
+                message = @"数据有误";
+            }
+            else
+            {
+                message = @"请求失败，请检查网络";
+            }
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alertView show];
+        }
+        
+        weakViewController.dailyForecastDataLoader = nil;
+        weakViewController.dataLoadStatus = DataLoadStatusNone;
+    }];
+    
+    return dataLoader;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,26 +83,33 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.dailyForecast count];
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
     
     // Configure the cell...
+    Weather *weather = [self.dailyForecast weatherAtIndex:indexPath.row];
+    cell.textLabel.text = weather.main;
+    cell.detailTextLabel.text = weather.weatherDescription;
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
